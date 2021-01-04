@@ -1,0 +1,49 @@
+# https://docs.docker.com/compose/compose-file
+version: '3.9'
+services:
+    php:
+        image: php:apache
+        ports:
+            - 80:80
+        volumes:
+            - ./php:/var/www/html
+
+    mongo:
+        image: mongo
+        ports:
+            - 27017:27017
+        restart: always
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: example
+
+    mongo-admin-ui:
+        image: mongo-express
+        ports:
+            - 81:8081
+        depends_on:
+            - mongo
+        restart: always
+        environment:
+            ME_CONFIG_MONGODB_ADMINUSERNAME: root
+            ME_CONFIG_MONGODB_ADMINPASSWORD: example
+
+    php-mongo:
+        build: ./php-mongo
+        ports:
+            - 82:80
+        depends_on:
+            - mongo
+        volumes:
+            - ./php-mongo/www:/var/www/html
+        environment:
+            MONGO_USERNAME: root
+            MONGO_PASSWORD: example
+            MONGO_HOST: mongo
+
+    angularjs:
+        build: ./angularjs
+        ports:
+            - 83:8000
+        volumes:
+            - ./angularjs/seed:/seed
