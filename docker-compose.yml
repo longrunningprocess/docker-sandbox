@@ -47,3 +47,10 @@ services:
             - 83:8000
         volumes:
             - ./angularjs/seed:/seed
+
+    intercomms:
+        # https://hub.docker.com/_/busybox (wanted it for ping) (https://en.wikipedia.org/wiki/BusyBox#Commands)
+        image: busybox
+        depends_on:
+            - php
+        command: ping -c 5 php

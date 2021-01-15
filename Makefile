@@ -1,6 +1,6 @@
 # https://docs.docker.com/compose/reference/overview
 
-start: php mongo php-mongo angularjs
+start: php mongo php-mongo angularjs intercomms
 
 .PHONY: php
 php: # http://localhost
@@ -18,6 +18,10 @@ php-mongo: # http://localhost:82
 .PHONY: angularjs
 angularjs: # http://localhost:83
 	docker-compose up -d angularjs
+
+.PHONY: intercomms
+intercomms:
+	docker-compose up intercomms
 
 .PHONY: update
 update:
