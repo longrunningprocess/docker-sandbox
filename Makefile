@@ -1,6 +1,6 @@
 # https://docs.docker.com/compose/reference/overview
 
-start: php mongo php-mongo angularjs intercomms
+start: php mongo php-mongo angularjs intercomms ssl
 
 .PHONY: php
 php: # http://localhost
@@ -22,6 +22,10 @@ angularjs: # http://localhost:83
 .PHONY: intercomms
 intercomms:
 	docker-compose up intercomms
+
+.PHONY: ssl
+ssl: # http://localhost:84 with autoredirect to https://localhost
+	docker-compose up -d ssl
 
 .PHONY: update
 update:

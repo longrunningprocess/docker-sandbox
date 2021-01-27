@@ -52,3 +52,20 @@ services:
         depends_on:
             - php
         command: ping -c 5 php
+
+    ssl:
+        image: caddy
+        restart: unless-stopped
+        ports:
+            - 84:80
+            - 443:443
+        volumes:
+            - $PWD/ssl/index.html:/usr/share/caddy/index.html
+            - caddy_data:/data
+            - caddy_config:/config
+        # https://caddyserver.com/docs/command-line
+        command: caddy file-server --root /usr/share/caddy --domain localhost
+
+volumes:
+  caddy_data:
+  caddy_config:
