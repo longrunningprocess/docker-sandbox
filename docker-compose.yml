@@ -55,6 +55,11 @@ services:
         # https://caddyserver.com/docs/command-line
         command: caddy file-server --root /usr/share/caddy --domain localhost
 
+    fs-watcher:
+        build: ./fs-watcher
+        volumes:
+            - $PWD/fs-watcher/dropzone:/data/dropzone
+
 volumes:
   caddy_data:
   caddy_config:

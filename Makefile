@@ -1,6 +1,6 @@
 # https://docs.docker.com/compose/reference/overview
 
-start: php mongo php-mongo angularjs intercomms ssl
+start: php mongo php-mongo angularjs ssl
 
 .PHONY: php
 php: # http://localhost
@@ -18,13 +18,23 @@ php-mongo: # http://localhost:82
 angularjs: # http://localhost:83
 	docker-compose up -d angularjs
 
-.PHONY: intercomms
-intercomms:
-	docker-compose up intercomms
+.PHONY: test-intercomms
+test-intercomms:
+	docker-compose run intercomms
 
 .PHONY: ssl
 ssl: # http://localhost:84 with autoredirect to https://localhost
 	docker-compose up -d ssl
+
+.PHONY: test-fswatch
+test-fswatch:
+	docker-compose up -d fs-watcher
+
+	@echo
+	@echo "go ahead a create files in fs-watcher/dropzone, ^c to stop"
+	@echo
+
+	docker-compose logs -f fs-watcher
 
 .PHONY: update
 update:
@@ -38,4 +48,5 @@ logs:
 clean:
 	docker-compose kill
 	docker-compose rm -f
-	docker system prune -f
+	docker system prune -f --volumes
+	rm -rf ./fs-watcher/dropzone/*

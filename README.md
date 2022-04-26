@@ -11,6 +11,14 @@ https://www.gnu.org/software/make (optional but simplifies commands)
 
 then visit http://localhost:8080 to view running apps.
 
+# testing intercomms
+
+> `make test-intercomms`
+
+# testing filesystem watcher
+
+> `make test-fswatch`
+
 # clean up
 
 > `make clean`
