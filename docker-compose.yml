@@ -4,7 +4,7 @@ services:
     php:
         image: php:apache
         ports:
-            - 80:80
+            - 8080:80
         volumes:
             - ./php:/var/www/html
 
@@ -14,17 +14,6 @@ services:
         environment:
             MONGO_INITDB_ROOT_USERNAME: root
             MONGO_INITDB_ROOT_PASSWORD: example
-
-    mongo-admin-ui:
-        image: mongo-express
-        ports:
-            - 81:8081
-        depends_on:
-            - mongo
-        restart: always
-        environment:
-            ME_CONFIG_MONGODB_ADMINUSERNAME: root
-            ME_CONFIG_MONGODB_ADMINPASSWORD: example
 
     php-mongo:
         build: ./php-mongo

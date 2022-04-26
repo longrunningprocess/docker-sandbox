@@ -9,7 +9,6 @@ php: # http://localhost
 .PHONY: mongo
 mongo: # admin-ui http://localhost:81
 	docker-compose up -d mongo
-	docker-compose up -d mongo-admin-ui
 
 .PHONY: php-mongo
 php-mongo: # http://localhost:82

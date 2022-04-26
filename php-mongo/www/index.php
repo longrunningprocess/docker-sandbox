@@ -1,12 +1,6 @@
-<?php 
-$mongo = new MongoDB\Driver\Manager("mongodb://$_ENV[MONGO_USERNAME]:$_ENV[MONGO_PASSWORD]@$_ENV[MONGO_HOST]:27017"); 
+<?php
+$mongo = new MongoDB\Driver\Manager("mongodb://$_ENV[MONGO_USERNAME]:$_ENV[MONGO_PASSWORD]@$_ENV[MONGO_HOST]:27017");
 ?>
-
-<ul>
-  <li>
-    <a href="http://localhost:81">mongo-admin-ui</a>
-  </li>
-</ul>
 
 <h1>Users</h1>
 <?php
